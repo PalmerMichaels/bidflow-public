@@ -2,16 +2,17 @@
 
 ## Scope
 
-- Build an original TypeScript command-line tool that ranks synthetic sales and procurement-style bid opportunities.
-- Use only invented buyers, bid stages, due dates, margins, values, risks, and workload estimates.
+- Build an original TypeScript command-line tool that demonstrates AI-style electrical takeoff workflow concepts with deterministic local logic.
+- Use only invented plan packages, sheets, callouts, quantities, confidence scores, costs, estimates, exceptions, and integration events.
 - Keep the project runnable with Node 22 direct TypeScript execution and no runtime dependencies.
 
 ## Implementation Steps
 
-- Model bid urgency, strategic value, delivery load, response confidence, and risk.
-- Produce a prioritized bid-flow board with next actions.
-- Add local tests for date handling, deterministic ranking, and submitted-bid scoring behavior.
-- Add validation checks for seed-data integrity and board generation.
+- Model synthetic plan/package intake for electrical bid packages.
+- Extract deterministic line items from invented electrical sheets and route low-confidence items to review.
+- Produce bid package dashboards with material subtotals, labor hours, readiness, estimate comparisons, exceptions, and mocked integrations.
+- Add local tests for extraction, review findings, dashboards, estimate variance, exception handling, and integration state.
+- Add validation checks for seed-data integrity and workspace generation.
 - Document usage, assumptions, and clean-room/non-regulated disclaimers in `README.md`.
 
 ## Clean-Room Constraints

@@ -1,6 +1,6 @@
 # Bidflow
 
-Bidflow is an original, dependency-light TypeScript CLI that prioritizes a small synthetic bid pipeline. It scores invented opportunities by urgency, value, margin, fit, relationship strength, workload, stage, and risk, then prints a next-action board.
+Bidflow is an original, dependency-light TypeScript CLI that demonstrates a clean-room electrical takeoff workflow. It ingests synthetic plan packages, extracts invented electrical line items, marks low-confidence review items, builds bid package dashboards, compares estimates, records exceptions, and emits mocked integration events.
 
 ## Requirements
 
@@ -35,9 +35,18 @@ Run seed-data and board validation:
 npm run validate
 ```
 
+## What It Demonstrates
+
+- Synthetic plan/package intake for fictional electrical bid packages.
+- Deterministic AI-style line-item extraction and review routing.
+- Bid package dashboards with material subtotals, labor hours, readiness, and estimator ownership.
+- Estimate comparisons against fictional baselines.
+- Exception handling for low-confidence, scope-gap, variance, and held-export states.
+- Mocked integrations for a planroom inbox, estimating CSV export, and dashboard API.
+
 ## Synthetic Data Statement
 
-All buyers, bid titles, values, dates, margins, workload estimates, scores, and actions in this repository are synthetic seed data created for demonstration and local validation only.
+All plan packages, sheet names, callouts, quantities, confidence scores, costs, labor hours, estimates, exceptions, estimator names, and integration events in this repository are synthetic seed data created for demonstration and local validation only.
 
 ## Clean-Room Disclaimer
 
@@ -45,7 +54,7 @@ This public implementation is original clean-room code. It does not use propriet
 
 ## Non-Regulated Disclaimer
 
-This tool is a lightweight prioritization demo. It is not a regulated procurement, financial, compliance, legal, or production bidding system. Users are responsible for independent review before making business decisions.
+This tool is a lightweight takeoff workflow demo. It is not a regulated procurement, engineering, electrical design, estimating, financial, compliance, legal, or production bidding system. Users are responsible for independent professional review before making business decisions.
 
 ## No-Affiliation Statement
 

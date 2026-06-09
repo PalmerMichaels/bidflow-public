@@ -1,46 +1,40 @@
 #!/usr/bin/env node
 import { pathToFileURL } from "node:url";
-import { syntheticBids } from "./bids.js";
-import { formatBoard, prioritizeBids, type PrioritizedBid } from "./scoring.js";
+import { syntheticEstimateCatalog, syntheticPlanPackages } from "./data.js";
+import { buildTakeoffWorkspace, renderWorkspace } from "./takeoff.js";
 
-export { syntheticBids } from "./bids.js";
-export { daysUntilDue, formatBoard, nextActionFor, prioritizeBids, scoreBid } from "./scoring.js";
-
-export type BidflowReport = {
-  generatedFor: string;
-  urgentCount: number;
-  priorities: PrioritizedBid[];
-};
+export { syntheticEstimateCatalog, syntheticPlanPackages } from "./data.js";
+export {
+  buildDashboards,
+  buildExceptions,
+  buildMockIntegrations,
+  buildTakeoffWorkspace,
+  compareEstimates,
+  extractLineItems,
+  renderWorkspace,
+  reviewLineItems,
+  type BidPackageDashboard,
+  type EstimateCatalog,
+  type EstimateComparison,
+  type ExceptionRecord,
+  type ExtractedLineItem,
+  type MockIntegrationEvent,
+  type PlanCallout,
+  type PlanPackage,
+  type PlanSheet,
+  type ReviewFinding,
+  type TakeoffWorkspace
+} from "./takeoff.js";
 
 export const cleanRoomDisclaimer =
-  "Clean-room public demo using synthetic fictional bid data only; not procurement, financial, compliance, legal, or production bidding advice.";
-
-export function buildBidflowReport(today = new Date()): BidflowReport {
-  const priorities = prioritizeBids(syntheticBids, today);
-
-  return {
-    generatedFor: today.toISOString().slice(0, 10),
-    urgentCount: priorities.filter((bid) => bid.daysUntilDue <= 3 && bid.stage !== "submitted").length,
-    priorities
-  };
-}
-
-export function renderBidflowReport(report = buildBidflowReport()): string {
-  return [
-    "Bidflow synthetic priority board",
-    cleanRoomDisclaimer,
-    `Generated for: ${report.generatedFor}`,
-    `Urgent active bids: ${report.urgentCount}`,
-    "",
-    formatBoard(report.priorities)
-  ].join("\n");
-}
+  "Clean-room public demo using synthetic electrical plan packages only; not procurement, engineering, financial, compliance, legal, or production bidding advice.";
 
 export function main(argv = process.argv.slice(2)): void {
   const todayArg = argv.find((arg) => arg.startsWith("--today="));
-  const today = todayArg ? new Date(`${todayArg.slice("--today=".length)}T00:00:00Z`) : new Date();
+  const generatedFor = todayArg ? todayArg.slice("--today=".length) : new Date().toISOString().slice(0, 10);
+  const workspace = buildTakeoffWorkspace(syntheticPlanPackages, syntheticEstimateCatalog, generatedFor);
 
-  console.log(renderBidflowReport(buildBidflowReport(today)));
+  console.log(`${renderWorkspace(workspace)}\n\n${cleanRoomDisclaimer}`);
 }
 
 const invokedPath = process.argv[1] ? pathToFileURL(process.argv[1]).href : "";

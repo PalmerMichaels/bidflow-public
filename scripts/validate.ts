@@ -1,29 +1,36 @@
-import { syntheticBids, type Bid } from "../src/bids.js";
-import { prioritizeBids } from "../src/scoring.js";
+import { syntheticEstimateCatalog, syntheticPlanPackages } from "../src/data.js";
+import { buildTakeoffWorkspace, type PlanPackage } from "../src/takeoff.js";
 
-function assertValidBid(bid: Bid): void {
-  const requiredText = [bid.id, bid.buyer, bid.title, bid.stage, bid.dueDate];
+function assertValidPackage(planPackage: PlanPackage): void {
+  const requiredText = [planPackage.id, planPackage.name, planPackage.dueDate, planPackage.estimator];
   if (requiredText.some((value) => value.trim().length === 0)) {
-    throw new Error(`Bid ${bid.id || "unknown"} has a blank required text field`);
+    throw new Error(`Plan package ${planPackage.id || "unknown"} has a blank required text field`);
   }
 
-  if (!/^BID-\d{4}$/.test(bid.id)) throw new Error(`Bid ${bid.id} has an invalid id`);
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(bid.dueDate)) throw new Error(`Bid ${bid.id} has an invalid due date`);
-  if (bid.estimatedValue <= 0 || bid.workloadHours <= 0) throw new Error(`Bid ${bid.id} has invalid effort/value numbers`);
+  if (!/^PKG-E-\d{3}$/.test(planPackage.id)) throw new Error(`Plan package ${planPackage.id} has an invalid id`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(planPackage.dueDate)) throw new Error(`Plan package ${planPackage.id} has an invalid due date`);
+  if (planPackage.sheets.length === 0) throw new Error(`Plan package ${planPackage.id} has no sheets`);
 
-  for (const [label, value] of [
-    ["fitScore", bid.fitScore],
-    ["relationshipScore", bid.relationshipScore],
-    ["riskScore", bid.riskScore]
-  ] as const) {
-    if (value < 0 || value > 100) throw new Error(`Bid ${bid.id} ${label} must be 0-100`);
+  for (const sheet of planPackage.sheets) {
+    if (!sheet.id || !sheet.title || !sheet.area) throw new Error(`Plan package ${planPackage.id} has an incomplete sheet`);
+    if (sheet.callouts.length === 0) throw new Error(`Sheet ${sheet.id} has no callouts`);
+
+    for (const callout of sheet.callouts) {
+      if (!syntheticEstimateCatalog.itemCosts[callout.code]) throw new Error(`Missing cost catalog entry for ${callout.code}`);
+      if (callout.quantity <= 0) throw new Error(`Callout ${callout.code} has invalid quantity`);
+      if (callout.confidence < 0 || callout.confidence > 1) throw new Error(`Callout ${callout.code} confidence must be 0-1`);
+    }
   }
 }
 
-for (const bid of syntheticBids) assertValidBid(bid);
+for (const planPackage of syntheticPlanPackages) assertValidPackage(planPackage);
 
-const board = prioritizeBids(syntheticBids, new Date("2026-06-09T00:00:00Z"));
-if (board.length !== syntheticBids.length) throw new Error("Prioritized board lost bids");
-if (new Set(board.map((bid) => bid.id)).size !== board.length) throw new Error("Bid ids must be unique");
+const workspace = buildTakeoffWorkspace(syntheticPlanPackages, syntheticEstimateCatalog, "2026-06-09");
+if (workspace.lineItems.length < 12) throw new Error("Expected at least 12 extracted line items");
+if (workspace.dashboards.length !== syntheticPlanPackages.length) throw new Error("Dashboard count must match package count");
+if (!workspace.exceptions.some((exception) => exception.category === "scope-gap")) throw new Error("Expected a synthetic scope-gap exception");
+if (!workspace.integrations.some((event) => event.target === "estimating-csv" && event.status === "held")) {
+  throw new Error("Expected mocked estimating export to be held while blockers exist");
+}
 
-console.log(`Validation passed for ${board.length} synthetic bids.`);
+console.log(`Validation passed for ${workspace.lineItems.length} synthetic electrical takeoff line items.`);

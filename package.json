@@ -1,13 +1,13 @@
 {
   "name": "bidflow-public",
   "version": "1.0.0",
-  "description": "Clean-room TypeScript CLI for prioritizing synthetic bid opportunities.",
+  "description": "Clean-room TypeScript CLI for synthetic electrical takeoff review workflows.",
   "type": "module",
   "bin": {
     "bidflow": "./dist/src/index.js"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "rm -rf dist && tsc -p tsconfig.json",
     "start": "npm run build && node dist/src/index.js",
     "test": "npm run build && node --test dist/tests/*.test.js && node dist/scripts/validate.js",
     "validate": "npm test"
