@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { syntheticBids } from "../src/bids.ts";
-import { daysUntilDue, prioritizeBids, scoreBid } from "../src/scoring.ts";
+import { syntheticBids } from "../src/bids.js";
+import { daysUntilDue, prioritizeBids, scoreBid } from "../src/scoring.js";
 
 const fixedToday = new Date("2026-06-09T00:00:00Z");
 

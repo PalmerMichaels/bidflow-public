@@ -4,7 +4,7 @@ Bidflow is an original, dependency-light TypeScript CLI that prioritizes a small
 
 ## Requirements
 
-- Node.js 22.6 or newer for direct TypeScript execution.
+- Node.js 20 or newer.
 - No runtime dependencies are required.
 
 ## Usage
@@ -45,7 +45,7 @@ This public implementation is original clean-room code. It does not use propriet
 
 ## Non-Regulated Disclaimer
 
-This tool is a lightweight prioritization demo. It is not procurement, legal, accounting, financial, compliance, medical, or other regulated advice. Users are responsible for independent review before making business decisions.
+This tool is a lightweight prioritization demo. It is not a regulated procurement, financial, compliance, legal, or production bidding system. Users are responsible for independent review before making business decisions.
 
 ## No-Affiliation Statement
 

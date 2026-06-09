@@ -1,4 +1,4 @@
-import type { Bid } from "./bids.ts";
+import type { Bid } from "./bids.js";
 
 export type PrioritizedBid = Bid & {
   daysUntilDue: number;

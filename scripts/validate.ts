@@ -1,5 +1,5 @@
-import { syntheticBids, type Bid } from "../src/bids.ts";
-import { prioritizeBids } from "../src/scoring.ts";
+import { syntheticBids, type Bid } from "../src/bids.js";
+import { prioritizeBids } from "../src/scoring.js";
 
 function assertValidBid(bid: Bid): void {
   const requiredText = [bid.id, bid.buyer, bid.title, bid.stage, bid.dueDate];
