@@ -1,38 +1,22 @@
-# Bidflow Clean-Room Implementation Plan
-
-## Goal
-Build an original TypeScript command-line bid response flow checker that evaluates fictional requirements, owner coverage, compliance evidence, and deadline risk for synthetic response work.
+# Bidflow Public Implementation Plan
 
 ## Scope
-- Create a runnable TypeScript CLI that prints a synthetic bid readiness report.
-- Include synthetic seed data for fictional bid responses, requirements, owners, compliance evidence, and due dates.
-- Add validation/tests for owner coverage, evidence gaps, readiness scoring, and deadline risk.
-- Document setup, usage, clean-room provenance, and non-regulated limitations in `README.md`.
-- Keep dependencies minimal and require no credentials, scraped data, or external services.
 
-## Intended Files
-- `package.json` with npm scripts for run, build, and test.
-- `tsconfig.json` for TypeScript compilation.
-- `src/index.ts` for CLI rendering and app output disclaimers.
-- `src/bidflow.ts` for deterministic readiness and validation logic.
-- `src/seedData.ts` for synthetic local seed data.
-- `test/validation.test.ts` for Node-based validation tests.
-- `README.md` with run instructions and clean-room/non-regulated disclaimers.
+- Build an original TypeScript command-line tool that ranks synthetic sales and procurement-style bid opportunities.
+- Use only invented buyers, bid stages, due dates, margins, values, risks, and workload estimates.
+- Keep the project runnable with Node 22 direct TypeScript execution and no runtime dependencies.
+
+## Implementation Steps
+
+- Model bid urgency, strategic value, delivery load, response confidence, and risk.
+- Produce a prioritized bid-flow board with next actions.
+- Add local tests for date handling, deterministic ranking, and submitted-bid scoring behavior.
+- Add validation checks for seed-data integrity and board generation.
+- Document usage, assumptions, and clean-room/non-regulated disclaimers in `README.md`.
 
 ## Clean-Room Constraints
-- Implement original public demo logic from scratch in this repository.
-- Use only fictional, synthetic seed data created for this demo.
-- Do not use scraped, proprietary, customer, government procurement, regulated bidding, financial, or compliance data.
-- Avoid copying any private YC/company implementation, naming, copy, datasets, workflows, or product-specific behavior.
-- Keep the app runnable locally with standard npm scripts and lightweight dependencies.
 
-## Non-Goals
-- No real procurement data, pricing advice, contract generation, or regulated bidding automation.
-- No legal, procurement, financial, or compliance advice.
-- No claims of affiliation with any private company, product, accelerator, or YC.
-- Not a production bidding system, procurement platform, financial system, compliance system, or source of regulated recommendations.
-
-## Verification
-- `npm install`
-- `npm test`
-- `npm run build`
+- This is a public, clean-room implementation and does not use proprietary Bidflow materials.
+- All seed data is synthetic and fictional.
+- This tool is not procurement, legal, accounting, financial, compliance, medical, or other regulated advice.
+- This repository makes no claim of affiliation, sponsorship, or endorsement by any company, buyer, vendor, accelerator, or agency.

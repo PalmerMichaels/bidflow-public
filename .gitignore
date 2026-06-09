@@ -1,2 +1,7 @@
-dist/
 node_modules/
+coverage/
+dist/
+.env
+.env.*
+*.log
+.DS_Store

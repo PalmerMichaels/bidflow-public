@@ -1,39 +1,52 @@
 # Bidflow
 
-Bidflow is an original clean-room TypeScript CLI that checks a synthetic bid response flow for readiness. It tracks fictional requirements, owner coverage, compliance evidence, and deadline risk, then prints a simple local report.
+Bidflow is an original, dependency-light TypeScript CLI that prioritizes a small synthetic bid pipeline. It scores invented opportunities by urgency, value, margin, fit, relationship strength, workload, stage, and risk, then prints a next-action board.
 
-## Disclaimers
+## Requirements
 
-- This is a clean-room public demo with no affiliation to any real company, accelerator, or YC.
-- All data is synthetic and fictional.
-- This is not legal, procurement, compliance, or financial advice.
-- Do not use this tool for regulated decisions, real procurement submissions, pricing decisions, contract review, or compliance determinations.
-- No credentials, scraped data, or external services are required.
+- Node.js 22.6 or newer for direct TypeScript execution.
+- No runtime dependencies are required.
 
-## Run
+## Usage
+
+Run the CLI with today's date:
 
 ```bash
-npm install
 npm start
 ```
 
-## Validate
+Run with a fixed date for deterministic output:
+
+```bash
+npm start -- --today=2026-06-09
+```
+
+## Validation
+
+Run unit tests:
 
 ```bash
 npm test
-npm run build
 ```
 
-## What It Checks
+Run seed-data and board validation:
 
-- Owner coverage for each fictional requirement.
-- Approved versus missing evidence for local synthetic evidence records.
-- Deadline pressure from deterministic due-date offsets.
-- A readiness score and status for demo triage only.
+```bash
+npm run validate
+```
 
-## Project Structure
+## Synthetic Data Statement
 
-- `src/index.ts` renders the CLI report and disclaimer.
-- `src/bidflow.ts` contains readiness scoring and seed validation logic.
-- `src/seedData.ts` contains fictional local seed data.
-- `test/validation.test.ts` asserts deterministic validation behavior.
+All buyers, bid titles, values, dates, margins, workload estimates, scores, and actions in this repository are synthetic seed data created for demonstration and local validation only.
+
+## Clean-Room Disclaimer
+
+This public implementation is original clean-room code. It does not use proprietary materials, private product behavior, confidential datasets, or copied implementation details from any third party.
+
+## Non-Regulated Disclaimer
+
+This tool is a lightweight prioritization demo. It is not procurement, legal, accounting, financial, compliance, medical, or other regulated advice. Users are responsible for independent review before making business decisions.
+
+## No-Affiliation Statement
+
+This repository does not claim affiliation with, endorsement by, or sponsorship from any company, accelerator, government agency, buyer, vendor, or named organization.
