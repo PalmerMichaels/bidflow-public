@@ -1,0 +1,16 @@
+{
+  "name": "bidflow",
+  "version": "1.0.0",
+  "description": "Synthetic bid response flow checker for fictional readiness reviews.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node dist/src/index.js",
+    "test": "npm run build && node dist/test/validation.test.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.29",
+    "typescript": "^5.8.3"
+  }
+}
